@@ -5,16 +5,16 @@ import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, TextInput, Alert
 export default function App() {
   const [pagina, setPagina] = useState('home');
   return (
-    <SafeAreaView style={styles.container}>
-      <Header pagina={pagina} setPagina={setPagina}/>
+    <><SafeAreaView style={styles.container}>
+      <Header pagina={pagina} setPagina={setPagina} />
       <ScrollView contentContainerStyle={styles.content}>
         {pagina === 'home' && <Home />}
-        {pagina === 'sobre' && <Sobre/>}
-        {pagina === 'servicos' && <Servicos/>}
+        {pagina === 'sobre' && <Sobre />}
+        {pagina === 'servicos' && <Servicos />}
         {pagina === 'contato' && <Contato />}
-        
+
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView><Footer /></>
   )
 }
 
@@ -39,7 +39,7 @@ function Header({pagina, setPagina}) {
 function Home() {
   return (
     <View style={styles.section}>
-      <Text style={styles.tittlr}>Bem-vindo ao Go and Spike</Text>
+      <Text style={styles.Title}>Bem-vindo ao Go and Spike</Text>
       <Text>Na Goal & Spike, acreditamos que o esporte vai muito além das quadras e dos campos — ele é emoção, identidade e paixão. Nossa missão é aproximar torcedores de seus ídolos, oferecendo produtos oficiais e autografados que carregam histórias e conquistas inesquecíveis.</Text>
     </View>
   )
@@ -48,13 +48,13 @@ function Home() {
 function Sobre() {
   return (
     <View style={styles.section}>
-      <Text style={styles.tittlE}>Sobre</Text>
+      <Text style={styles.Title}>Sobre</Text>
       <Text>Mais do que uma loja, somos uma comunidade para fãs de futebol e vôlei que buscam autenticidade e exclusividade. Cada item da Goal & Spike é acompanhado de certificado de autenticidade e pensado para transformar o amor pelo esporte em uma experiência única.</Text>
     </View>
   )
 }
 
-function Servico() {
+function Servicos() {
   return (
     <View style={styles.section}>
       <Text style={styles.Title}>Nossos Serviços</Text>
@@ -63,61 +63,66 @@ function Servico() {
       <Text>Certificação de autenticidade</Text>
       <Text>Atendimento ao cliente</Text>
     </View>
-  );
+  )
 }
 
 function Contato() {
- const [nome, setNome] = React.useState('');
- const [email, setEmail] = React.useState('');
- const [mensagem, setMensagem] = React.useState('');
- function enviar(){
-  if (!nome || !email || !mensagem){
-    Alert.alert('Erro', 'Por favor, preencha todos os campos');
-    return;
+  const [nome, setNome] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [mensagem, setMensagem] = React.useState('');
+
+  function enviar() {
+    if (!nome || !email || !mensagem) {
+      Alert.alert('Erro', 'Por favor preencha todos os campos');
+      return;
+    }
+    Alert.alert('Mensagem enviada', `Obrigado, ${nome}! Retornaremos em breve.`);
+    setNome('');
+    setEmail('');
+    setMensagem('');
   }
-  Alert.alert('Sucesso', `Obrigado, ${nome}! Retornaremos em breve`);
-  setNome('');
-  setEmail('');
-  setMensagem('');
- }
- return (
-  <View style={styles.section}>
-    <Text style={styles.Title}>Contato</Text>
-    <TextInput
-      placeholder="Nome"
-      value={nome}
-      onChangeText={setNome}
-      style={styles.input}
-    />
-    <TextInput
-      placeholder="Email"
-      value={email}
-      onChangeText={setEmail}
-      style={styles.input}
-      keyboardType="email-address"
-    />
-    <TextInput
-      placeholder="Mensagem"
-      value={mensagem}
-      onChangeText={setMensagem}
-      style={[styles.input, {height: 100}]}
-      multiline
-    />
-    <TouchableOpacity style={styles.button} onPress={enviar}>
-      <Text style={styles.buttonText}>Enviar</Text>
-    </TouchableOpacity>
-  </View>
-);
+
+  return (
+    <View style={styles.section}>
+      <Text style={styles.title}>Contato</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={[styles.input, {height: 100}]}
+        placeholder="Mensagem"
+        value={mensagem}
+        onChangeText={setMensagem}
+        multiline
+      />
+      <TouchableOpacity style={styles.button} onPress={enviar}>
+        <Text style={styles.buttonText}>Enviar</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 
 function Footer() {
   return (
     <View style={styles.footer}>
-      <Text style={{color: 'white'}}>© 2023 Goal & Spike. Todos os direitos reservados.</Text>
+      <Text style={{color: 'white'}}>
+        © 2023 Goal & Spike. Todos os direitos reservados.
+      </Text>
     </View>
   );
-} 
+}
+
 
 const styles = StyleSheet.create({
   container: {flex: 1,backgroundColor: '#f4f7fa'},
@@ -144,5 +149,5 @@ const styles = StyleSheet.create({
 
   buttonText: {color: 'white',fontSize: 16,fontWeight: 'bold'},
 
-  footer: {backgroundColor: '#00264d',padding: 15,alignItems: 'center'},
+  footer: {position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#00264d', padding: 15, alignItems: 'center',},
 });
